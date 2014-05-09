@@ -67,7 +67,7 @@ class Factoids
     factoid = this.get key
     if @cache[key]
       [first..., last] = @cache[key]
-      "#{person}, #{key} is #{first.join(,)} and #{last}"
+      "#{person}, #{key} is #{first.join(',')} and #{last}"
     else
       factoid
 
