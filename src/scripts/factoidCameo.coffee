@@ -36,14 +36,16 @@ class Factoids
 
   append: (key, val) ->
     if @cache[key]
-      @cache[key] = @cache[key] + ", " + val
+      @cache[key].push val
       @robot.brain.data.factoids = @cache
-      "Ok. #{key} is also #{val} "
+      [first..., last] = @cache[key]
+      "Ok. #{key} is also #{first.join(',')} and #{last} "
     else
       "No factoid for #{key}. It can't also be #{val} if it isn't already something."
 
   setFactoid: (key, val) ->
-    @cache[key] = val
+    @cache[key] = []
+    @cache[key].push val
     @robot.brain.data.factoids = @cache
     "OK. #{key} is #{val} "
 
@@ -64,7 +66,8 @@ class Factoids
   tell: (person, key) ->
     factoid = this.get key
     if @cache[key]
-      "#{person}, #{key} is #{factoid}"
+      [first..., last] = @cache[key]
+      "#{person}, #{key} is #{first.join(,)} and #{last}"
     else
       factoid
 
